@@ -1,11 +1,6 @@
-dist/
-built/
-static/
-dist/
+/dist/
+/mochawesome-report/
+/node_modules/
 
-node_modules/
-
-.sass-cache/
+babel.config.*js
 yarn-error-log
-
-src/core/
