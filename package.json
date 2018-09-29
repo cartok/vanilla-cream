@@ -1,6 +1,6 @@
 {
   "name": "vanilla-cream",
-  "version": "0.0.0-prerelease",
+  "version": "0.0.0-prerelease.0",
   "description": "",
   "main": "./dist/index.js",
   "keywords": [],
