@@ -15,9 +15,11 @@ import * as _dom from "./lib/dom/_collection"
 import * as _input from "./lib/input/_collection"
 import * as _state from "./lib/state/state"
 import * as _browser from "./lib/browser/_collection"
+import * as _svg from "./lib/svg/_collection"
 
 export const http = _http
 export const state = _state
+export const svg = _svg
 
 export const dom = _dom
 /**/export const getElementStyle = dom.getElementStyle

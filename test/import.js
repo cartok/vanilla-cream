@@ -15,6 +15,8 @@ import { state } from "../dist/index"
 import { dom } from "../dist/index"
 import { getElementStyle, isChildOf, iterate, setGlobalStyle, removeEmptyAttributes } from "../dist/index"
 
+import { svg } from "../dist/index"
+
 import { input } from "../dist/index"
 import { mouse, keyboard } from "../dist/index"
 
@@ -64,6 +66,10 @@ describe("testing imports from /dist/index.js", ()=>{
         iterate.should.be.a("function")    
         setGlobalStyle.should.be.a("function")    
         removeEmptyAttributes.should.be.a("function")    
+    })
+
+    it("should import svg", ()=>{
+        svg.should.be.an("object")
     })
 
     it("should import input", ()=>{
