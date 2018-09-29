@@ -1,0 +1,24 @@
+{
+    "compileOnSave": true,
+    "exclude": [ "node_modules", "static" ],
+    "include": [ "src/**/*" ],
+    "compilerOptions": {
+        "moduleResolution": "node",
+        "target": "es6",
+        "lib": ["es6", "dom"],
+        "jsx": "preserve",
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "sourceMap": true,
+        "outDir": "static"
+    },
+    "awesomeTypescriptLoaderOptions": {
+        "useBabel": true,
+        "useCache": true,
+        "doTypeCheck": false,
+        "skipDeclarationFilesCheck": true,
+        "ignoreDiagnostics": [8010]
+    }
+}

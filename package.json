@@ -1,0 +1,65 @@
+{
+  "name": "vanilla-cream",
+  "version": "0.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build:css:wizard": "./node_modules/.bin/lessc --source-map ./src/components/wizard/wizard.backup.less ./dist/wizard.css",
+    "build:css:context": "./node_modules/.bin/node-sass --sourcemap=inline ./src/components/contextmenu/context-menu.style.sass ./dist/context-menu.css",
+    "build:css": "npm run --silent build:css:wizard && npm run --silent build:css:context",
+    "clean:js": "rm $(find ./dist/ -type f -regex '.*\\.[jt]sx?')",
+    "clean:dir": "rm -rf ./build",
+    "babelrc:build": "cp ./.babelrc.build ./.babelrc",
+    "babelrc:mocha": "cp ./.babelrc.mocha ./.babelrc",
+    "update:NodeTemplate": "npm update dom-node-template; rm -rf ./src/external/NodeTemplate && mkdir -p ./src/external/NodeTemplate && cp -R ./node_modules/dom-node-template/src/* ./src/external/NodeTemplate/",
+    "update:Observable": "npm update observe-literal; rm -rf ./src/external/Observable && mkdir -p ./src/external/Observable && cp -R ./node_modules/observe-literal/src/* ./src/external/Observable/",
+    "update:externals": "npm run --silent update:NodeTemplate && npm run --silent update:Observable",
+    "mocha": "npm run --silent babelrc:mocha && ./node_modules/.bin/mocha --require babel-core/register --require jsdom-global/register",
+    "transpile": "npm run --silent update:externals && ./node_modules/.bin/babel --out-dir ./build ./src",
+    "--------------------------------------------------------------------------------------------------------------------------------------------": "",
+    "build": "clear; npm install; npm run --silent clean:dir && npm run --silent babelrc:build && npm run --silent transpile && npm run --silent build:css",
+    "test": "clear; npm run --silent babelrc:mocha && npm run --silent transpile && npm run --silent mocha && npm run --silent build:css",
+    "test:monitor": "nodemon -x \"npm run --silent test\"",
+    "prepublishOnly": "npm run --silent build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "gitlab.gereon-reus.de:/l3pweb/vanilla-cream"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "babel-cli": "*",
+    "babel-eslint": "*",
+    "babel-plugin-transform-flow-strip-types": "*",
+    "babel-preset-env": "*",
+    "chai": "*",
+    "eslint": "^4.19.1",
+    "eslint-plugin-flowtype": "*",
+    "flow-bin": "^0.74.0",
+    "jquery": "*",
+    "jsdom": "*",
+    "jsdom-global": "*",
+    "less": "*",
+    "mocha": "^4.x.x",
+    "node-sass": "^4.x.x",
+    "nodemon": "*",
+    "tslint": "*",
+    "tslint-eslint-rules": "*",
+    "typescript": "*"
+  },
+  "dependencies": {
+    "dom-node-template": "^2.1.4",
+    "observe-literal": "^0.6.5"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "build",
+      "built",
+      "dist",
+      "bin",
+      "node_modules",
+      "src/external"
+    ]
+  }
+}
