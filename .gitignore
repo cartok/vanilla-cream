@@ -1,0 +1,11 @@
+dist/
+built/
+static/
+dist/
+
+node_modules/
+
+.sass-cache/
+yarn-error-log
+
+src/core/

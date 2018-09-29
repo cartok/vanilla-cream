@@ -5,7 +5,7 @@ const PRE = `${baseLogPrefix}.${systemLogPrefix}.${moduleLogPrefix} |`
 
 import * as dom from "../dom/_collection"
 import stylesheet from "../../stylesheet"
-import { BROWSER_NAME } from "../util/_collection"
+import { BROWSER_NAME } from "../browser/_collection"
 
 export const button = {
     isLeft: btn => btn === 0,
@@ -47,92 +47,95 @@ export const getMousePosition = (event, nodeToRelateTo) => {
  * 
  */
 let lastCursorClass = undefined
-stylesheet.insertRule(`
-    .NO_POINTER_EVENTS {
-        pointer-events: none !important; 
-    }`
-)
-stylesheet.insertRule(`
-    .NO_SELECTION {
-        -moz-user-select: -moz-none !important;
-        -khtml-user-select: none !important;
-        -webkit-user-select: none !important;
-        -o-user-select: none !important;
-        user-select: none !important;
-    }`
-)
-stylesheet.insertRule(
-    `.cursor-default{
-        cursor : auto;
-    }`
-)
-stylesheet.insertRule(
-    `.cursor-none{
-        cursor : none !important;
-    }`
-)
-stylesheet.insertRule(
-    `.cursor-default{
-        cursor : default !important;
-    }`
-)
-stylesheet.insertRule(
-    `.cursor-create{
-        cursor : crosshair !important;
-    }`
-)
-stylesheet.insertRule(
-    `.cursor-select{
-        cursor : pointer !important;
-    }`
-)
-stylesheet.insertRule(
-    `.cursor-move{
-        cursor : grab !important;
-        cursor : -moz-grab !important;
-        cursor : -webkit-grab !important;
-    }`
-)
-stylesheet.insertRule(
-    `.cursor-top-left{
-        cursor : nw-resize !important;
-    }`
-)
-stylesheet.insertRule(
-    `.cursor-top-right{
-        cursor : ne-resize !important;
-    }`
-)
-stylesheet.insertRule(
-    `.cursor-bottom-left{
-        cursor : sw-resize !important;
-    }`
-)
-stylesheet.insertRule(
-    `.cursor-bottom-right{
-        cursor : se-resize !important;
-    }`
-)
-stylesheet.insertRule(
-    `.cursor-top{
-        cursor : n-resize !important;
-    }`
-)
-stylesheet.insertRule(
-    `.cursor-right{
-        cursor : e-resize !important;
-    }`
-)
-stylesheet.insertRule(
-    `.cursor-bottom{
-        cursor : s-resize !important;
-    }`
-)
-stylesheet.insertRule(
-    `.cursor-left{
-        cursor : w-resize !important;
-    }`
-)
+// QUICKFIX (mocha, jsdom, stylesheet, undefined)
+if(BROWSER_NAME !== "unknown"){
+    stylesheet.insertRule(`
+        .NO_POINTER_EVENTS {
+            pointer-events: none !important; 
+        }`
+    )
+    stylesheet.insertRule(`
+        .NO_SELECTION {
+            -moz-user-select: -moz-none !important;
+            -khtml-user-select: none !important;
+            -webkit-user-select: none !important;
+            -o-user-select: none !important;
+            user-select: none !important;
+        }`
+    )
+    stylesheet.insertRule(
+        `.cursor-default{
+            cursor : auto;
+        }`
+    )
+    stylesheet.insertRule(
+        `.cursor-none{
+            cursor : none !important;
+        }`
+    )
+    stylesheet.insertRule(
+        `.cursor-default{
+            cursor : default !important;
+        }`
+    )
+    stylesheet.insertRule(
+        `.cursor-create{
+            cursor : crosshair !important;
+        }`
+    )
+    stylesheet.insertRule(
+        `.cursor-select{
+            cursor : pointer !important;
+        }`
+    )
+    stylesheet.insertRule(
+        `.cursor-move{
+            cursor : grab !important;
+            cursor : -moz-grab !important;
+            cursor : -webkit-grab !important;
+        }`
+    )
+    stylesheet.insertRule(
+        `.cursor-top-left{
+            cursor : nw-resize !important;
+        }`
+    )
+    stylesheet.insertRule(
+        `.cursor-top-right{
+            cursor : ne-resize !important;
+        }`
+    )
+    stylesheet.insertRule(
+        `.cursor-bottom-left{
+            cursor : sw-resize !important;
+        }`
+    )
+    stylesheet.insertRule(
+        `.cursor-bottom-right{
+            cursor : se-resize !important;
+        }`
+    )
+    stylesheet.insertRule(
+        `.cursor-top{
+            cursor : n-resize !important;
+        }`
+    )
+    stylesheet.insertRule(
+        `.cursor-right{
+            cursor : e-resize !important;
+        }`
+    )
+    stylesheet.insertRule(
+        `.cursor-bottom{
+            cursor : s-resize !important;
+        }`
+    )
+    stylesheet.insertRule(
+        `.cursor-left{
+            cursor : w-resize !important;
+        }`
+    )
+}
 export const CURSORS = {
     NONE: {
         id: 0,

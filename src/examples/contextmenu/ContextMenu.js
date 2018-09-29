@@ -3,7 +3,7 @@ import systemLogPrefix from "../_log-prefix.js"
 import baseLogPrefix from "../../_log-prefix.js"
 const PRE = `${baseLogPrefix}.${systemLogPrefix}.${moduleLogPrefix} |`
 
-import NodeTemplate from "../../external/NodeTemplate/NodeTemplate"
+import NodeTemplate from "../../core/NodeTemplate/NodeTemplate"
 import * as mouse from "../../lib/input/mouse"
 import * as dom from "../../lib/dom/_collection"
 

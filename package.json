@@ -1,65 +1,66 @@
 {
   "name": "vanilla-cream",
-  "version": "0.0.0",
+  "version": "0.0.0-prerelease",
   "description": "",
   "main": "./dist/index.js",
-  "scripts": {
-    "build:css:wizard": "./node_modules/.bin/lessc --source-map ./src/components/wizard/wizard.backup.less ./dist/wizard.css",
-    "build:css:context": "./node_modules/.bin/node-sass --sourcemap=inline ./src/components/contextmenu/context-menu.style.sass ./dist/context-menu.css",
-    "build:css": "npm run --silent build:css:wizard && npm run --silent build:css:context",
-    "clean:js": "rm $(find ./dist/ -type f -regex '.*\\.[jt]sx?')",
-    "clean:dir": "rm -rf ./build",
-    "babelrc:build": "cp ./.babelrc.build ./.babelrc",
-    "babelrc:mocha": "cp ./.babelrc.mocha ./.babelrc",
-    "update:NodeTemplate": "npm update dom-node-template; rm -rf ./src/external/NodeTemplate && mkdir -p ./src/external/NodeTemplate && cp -R ./node_modules/dom-node-template/src/* ./src/external/NodeTemplate/",
-    "update:Observable": "npm update observe-literal; rm -rf ./src/external/Observable && mkdir -p ./src/external/Observable && cp -R ./node_modules/observe-literal/src/* ./src/external/Observable/",
-    "update:externals": "npm run --silent update:NodeTemplate && npm run --silent update:Observable",
-    "mocha": "npm run --silent babelrc:mocha && ./node_modules/.bin/mocha --require babel-core/register --require jsdom-global/register",
-    "transpile": "npm run --silent update:externals && ./node_modules/.bin/babel --out-dir ./build ./src",
-    "--------------------------------------------------------------------------------------------------------------------------------------------": "",
-    "build": "clear; npm install; npm run --silent clean:dir && npm run --silent babelrc:build && npm run --silent transpile && npm run --silent build:css",
-    "test": "clear; npm run --silent babelrc:mocha && npm run --silent transpile && npm run --silent mocha && npm run --silent build:css",
-    "test:monitor": "nodemon -x \"npm run --silent test\"",
-    "prepublishOnly": "npm run --silent build"
-  },
+  "keywords": [],
+  "author": "Dennis Weiershäuser <dennis.weiershaeuser@informatik.hs-fulda.de>",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "gitlab.gereon-reus.de:/l3pweb/vanilla-cream"
   },
-  "author": "",
-  "license": "UNLICENSED",
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "update:NodeTemplate": "npm update dom-node-template && rm -rf ./src/core/NodeTemplate && mkdir -p ./src/core/NodeTemplate && cp -R ./node_modules/dom-node-template/src/* ./src/core/NodeTemplate/",
+    "update:Observable": "npm update observe-literal && rm -rf ./src/core/Observable && mkdir -p ./src/core/Observable && cp -R ./node_modules/observe-literal/src/* ./src/core/Observable/",
+    "update:core": "npm run update:NodeTemplate && npm run update:Observable",
+    "babelrc:es5": "cp ./babel.config.es5.js ./babel.config.js",
+    "babelrc:es6": "cp ./babel.config.es6.js ./babel.config.js",
+    "babel": "npm run update:core && npm install -d && babel --out-dir ./dist ./src",
+    "build:es5": "npm run babelrc:es5 && npm run babel",
+    "build:es6": "npm run babelrc:es6 && npm run babel",
+    "build:webpack": "npm run update:core && npm run babelrc:es5 && npm install -d && webpack --mode=production",
+    "build:all": "npm run build:webpack && npm run build:es6",
+    "test": "npm run build:es5 && mocha -R mochawesome -r @babel/register -r jsdom-global/register && chromium ./mochawesome-report/mochawesome.html",
+    "test:monitor": "nodemon -x \"npm run test\"",
+    "prepublishOnly": "npm run test && npm run build:all"
+  },
   "devDependencies": {
-    "babel-cli": "*",
-    "babel-eslint": "*",
-    "babel-plugin-transform-flow-strip-types": "*",
-    "babel-preset-env": "*",
-    "chai": "*",
-    "eslint": "^4.19.1",
-    "eslint-plugin-flowtype": "*",
-    "flow-bin": "^0.74.0",
-    "jquery": "*",
-    "jsdom": "*",
-    "jsdom-global": "*",
-    "less": "*",
-    "mocha": "^4.x.x",
-    "node-sass": "^4.x.x",
-    "nodemon": "*",
-    "tslint": "*",
-    "tslint-eslint-rules": "*",
-    "typescript": "*"
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-transform-destructuring": "^7.0.0",
+    "@babel/plugin-transform-flow-strip-types": "^7.0.0",
+    "@babel/plugin-transform-parameters": "7.1.0",
+    "@babel/plugin-transform-spread": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "chai": "^4.2.0",
+    "eslint": "^5.6.0",
+    "eslint-plugin-flowtype": "^2.50.3",
+    "flow-bin": "^0.81.0",
+    "http-server": "^0.10.0",
+    "jquery": "^3.3.1",
+    "jsdom": "^11.12.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.0.3",
+    "nodemon": "^1.18.4",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1"
   },
   "dependencies": {
-    "dom-node-template": "^2.1.4",
-    "observe-literal": "^0.6.5"
+    "dom-node-template": "^2.1.10",
+    "observe-literal": "^0.6.4"
   },
   "nodemonConfig": {
-    "ignore": [
-      "build",
-      "built",
-      "dist",
-      "bin",
-      "node_modules",
-      "src/external"
-    ]
+    "watch": [
+      "test/**/*",
+      "src/**/*"
+    ],
+    "ext": "js",
+    "delay": 500,
+    "verbose": true
   }
 }
