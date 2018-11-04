@@ -1,21 +1,21 @@
 // CSS
-import "./stylesheet"
+import "./stylesheet.js"
 
 // JS
 // - external
-import _Observable from "./core/Observable/Observable"
-import _NodeTemplate from "./core/NodeTemplate/NodeTemplate"
+import _Observable from "./core/Observable/Observable.js"
+import _NodeTemplate from "./core/NodeTemplate/NodeTemplate.js"
 
 export const Observable = _Observable
 export const NodeTemplate = _NodeTemplate
 
 // - lib
-import * as _http from "./lib/http/http"
-import * as _dom from "./lib/dom/_collection"
-import * as _input from "./lib/input/_collection"
-import * as _state from "./lib/state/state"
-import * as _browser from "./lib/browser/_collection"
-import * as _svg from "./lib/svg/_collection"
+import * as _http from "./lib/http/http.js"
+import * as _dom from "./lib/dom/_collection.js"
+import * as _input from "./lib/input/_collection.js"
+import * as _state from "./lib/state/state.js"
+import * as _browser from "./lib/browser/_collection.js"
+import * as _svg from "./lib/svg/_collection.js"
 
 export const http = _http
 export const state = _state

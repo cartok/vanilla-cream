@@ -67,7 +67,7 @@ export default class ContextMenu {
                 document.body.removeChild(this.view.root)
             }
         }).handler)
-        
+   
     }
 }
 

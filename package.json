@@ -13,7 +13,7 @@
   "scripts": {
     "clean": "rm -rf ./dist",
     "update:NodeTemplate": "npm update dom-node-template && rm -rf ./src/core/NodeTemplate && mkdir -p ./src/core/NodeTemplate && cp -R ./node_modules/dom-node-template/src/* ./src/core/NodeTemplate/",
-    "update:Observable": "npm update observe-literal && rm -rf ./src/core/Observable && mkdir -p ./src/core/Observable && cp -R ./node_modules/observe-literal/src/* ./src/core/Observable/",
+    "update:Observable": "npm update literal-observer && rm -rf ./src/core/Observable && mkdir -p ./src/core/Observable && cp -R ./node_modules/literal-observer/src/* ./src/core/Observable/",
     "update:core": "npm run update:NodeTemplate && npm run update:Observable",
     "babelrc:es5": "cp ./babel.config.es5.js ./babel.config.js",
     "babelrc:es6": "cp ./babel.config.es6.js ./babel.config.js",
@@ -22,9 +22,7 @@
     "build:es6": "npm run babelrc:es6 && npm run babel",
     "build:webpack": "npm run update:core && npm run babelrc:es5 && npm install -d && webpack --mode=production",
     "build:all": "npm run build:webpack && npm run build:es6",
-    "test": "npm run build:es5 && mocha -R mochawesome -r @babel/register -r jsdom-global/register && chromium ./mochawesome-report/mochawesome.html",
-    "test:monitor": "nodemon -x \"npm run test\"",
-    "prepublishOnly": "npm run test && npm run build:all"
+    "prepublishOnly": "npm run build:all"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.0",
@@ -51,8 +49,8 @@
     "webpack-cli": "^3.1.1"
   },
   "dependencies": {
-    "dom-node-template": "^2.1.10",
-    "observe-literal": "^0.6.4"
+    "dom-node-template": "^3.0.3",
+    "literal-observer": "^0.8.2"
   },
   "nodemonConfig": {
     "watch": [

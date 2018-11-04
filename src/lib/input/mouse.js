@@ -1,11 +1,11 @@
-import moduleLogPrefix from "./_log-prefix"
-import systemLogPrefix from "../_log-prefix"
-import baseLogPrefix from "../../_log-prefix"
+import moduleLogPrefix from "./_log-prefix.js"
+import systemLogPrefix from "../_log-prefix.js"
+import baseLogPrefix from "../../_log-prefix.js"
 const PRE = `${baseLogPrefix}.${systemLogPrefix}.${moduleLogPrefix} |`
 
-import * as dom from "../dom/_collection"
-import stylesheet from "../../stylesheet"
-import { BROWSER_NAME } from "../browser/_collection"
+import * as dom from "../dom/_collection.js"
+import stylesheet from "../../stylesheet.js"
+import { BROWSER_NAME } from "../browser/_collection.js"
 
 export const button = {
     isLeft: btn => btn === 0,

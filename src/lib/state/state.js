@@ -1,9 +1,7 @@
-import moduleLogPrefix from "./_log-prefix"
-import systemLogPrefix from "../_log-prefix"
-import baseLogPrefix from "../../_log-prefix"
+import moduleLogPrefix from "./_log-prefix.js"
+import systemLogPrefix from "../_log-prefix.js"
+import baseLogPrefix from "../../_log-prefix.js"
 const PRE = `${baseLogPrefix}.${systemLogPrefix}.${moduleLogPrefix} |`
-
-// import "../../lib/prototype/Array"
 
 const UNDO = []
 const REDO = []
@@ -15,7 +13,7 @@ let initialized = false
 
 let logging = true
 
-/** init */
+
 export function init(options = {
     logging: true
 }){
@@ -31,7 +29,7 @@ export function setHistorySize(x: Number){
     historySize = x
 }
 
-/** main */
+
 export function add(obj){
     if(!initialized) throw new Error(`${PRE} call state.init() at the start of your application before using it.`)
     // reset redo
@@ -53,7 +51,6 @@ export function add(obj){
         console.log(`${PRE} added restore point.`)
     }
 }
-// @prototype: used Array.top before. Had Problems with other librarys that override Array's prototype aswell.
 export function undo(){
     if(!initialized) throw new Error(`${PRE} call state.init() at the start of your application before using it.`)
     if(UNDO.length > 0){
@@ -68,7 +65,6 @@ export function undo(){
         }
     }
 }
-// @prototype: used Array.top before. Had Problems with other librarys that override Array's prototype aswell.
 export function redo(){
     if(!initialized) throw new Error(`${PRE} call state.init() at the start of your application before using it.`)
     if(REDO.length > 0){
